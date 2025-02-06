@@ -1,54 +1,19 @@
-#  name: Converter CI 
-# on: 
-#   push: 
-#     branches: [ "main" ] 
-# jobs: 
-#   build: 
-#     runs-on: ubuntu-latest 
-#     steps: 
-#       - name: Checkout repository 
-#         uses: actions/checkout@v4 
-#       - name: Setup Node.js 
-#         uses: actions/setup-node@v4 
-#         with: 
-#           node-version: 18  # Use the Node.js version of your choice 
-#       - name: Install dependencies 
-#         run: npm install 
-#       - name: Run Jest tests 
-#         run: npm test 
+ name: Converter CI 
+on: 
+  push: 
+    branches: [ "main" ] 
+jobs: 
+  build: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Checkout repository 
+        uses: actions/checkout@v4 
+      - name: Setup Node.js 
+        uses: actions/setup-node@v4 
+        with: 
+          node-version: 18  # Use the Node.js version of your choice 
+      - name: Install dependencies 
+        run: npm install 
+      - name: Run Jest tests 
+        run: npm test 
 
-
-name: pages-build-deployment
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Create missing directory
-        run: mkdir -p /github/workspace/docs
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Jest tests
-        run: npm test
-
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1.0.13
-        with:
-          source: '.'
-          destination: './_site'
