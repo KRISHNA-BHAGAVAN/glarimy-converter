@@ -1,4 +1,4 @@
- name: Converter CI 
+name: Converter CI 
 on: 
   push: 
     branches: [ "main" ] 
